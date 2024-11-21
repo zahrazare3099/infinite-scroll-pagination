@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 import ProductCard from "./ProductCard";
 
 const itemsPerPage = 20;
-const ShowProducts = () => {
+const Products = () => {
   const {
     items,
     setItems,
@@ -62,4 +62,4 @@ const ShowProducts = () => {
   );
 };
 
-export default ShowProducts;
+export default Products;
