@@ -26,9 +26,12 @@ const useInfiniteScroll = (itemsPerPage) => {
           setHasMore(false); // No more items available
         }
         // Only update items if newItems are not empty
-        if (newItems.length > 0) {
-          setItems((prevItems) => [...prevItems, ...newItems]);
-        }
+        // if (newItems.length > 0) {
+        //   console.log("#2 newItems.length > 0", newItems.length);
+
+        //   setItems((prevItems) => [...prevItems, ...newItems]);
+        // }
+        setItems((prevItems) => [...prevItems, ...newItems]);
         // setItems(newItems);
         setLoading(false);
       }, 1000);
@@ -72,6 +75,16 @@ const useInfiniteScroll = (itemsPerPage) => {
           console.log("has?", hasMore);
           loadMoreItems(); // Load more data
         }
+        if (!hasMore) {
+          console.log("! has more: -20,end");
+
+          setItems(() => [...items.slice(-20, items.length)]);
+        }
+        if (currentPage == 10) {
+          console.log("curr p=10");
+
+          setHasMore(false);
+        }
       }
     });
     if (node) observer.current.observe(node); // Observe the last item
@@ -84,6 +97,7 @@ const useInfiniteScroll = (itemsPerPage) => {
     lastItemObserver,
     currentPage,
     hasMore,
+    setHasMore,
   };
 };
 

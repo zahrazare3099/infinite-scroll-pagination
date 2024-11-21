@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="bg-slate-200 min-h-screen flex flex-col px-4 gap-4 pb-24">
+    <div className="bg-slate-200  min-h-dvh flex flex-col pb-14 gap-4 ">
       <Header />
       <ShowProducts />
     </div>
