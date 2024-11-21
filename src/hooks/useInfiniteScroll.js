@@ -17,22 +17,17 @@ const useInfiniteScroll = (itemsPerPage) => {
       if (loading || !hasMore) return;
       setLoading(true);
 
-      // Simulate an API call with a timeout
+      // simulate an API call with a timeout
       setTimeout(() => {
         const startIndex = (currentPage - 1) * itemsPerPage;
         const newItems = products.slice(startIndex, startIndex + itemsPerPage);
-
+        // No more items available
         if (newItems.length < itemsPerPage) {
-          setHasMore(false); // No more items available
+          setHasMore(false);
         }
-        // Only update items if newItems are not empty
-        // if (newItems.length > 0) {
-        //   console.log("#2 newItems.length > 0", newItems.length);
 
-        //   setItems((prevItems) => [...prevItems, ...newItems]);
-        // }
         setItems((prevItems) => [...prevItems, ...newItems]);
-        // setItems(newItems);
+
         setLoading(false);
       }, 1000);
     }
@@ -45,49 +40,23 @@ const useInfiniteScroll = (itemsPerPage) => {
 
   // Observer for the last item
   function lastItemObserver(node) {
-    if (loading) return; // Prevent observer from firing while loading
+    // Stop the observer from activating while loading
+    if (loading) return;
+    // Disconnect the previous observer
+    if (observer.current) observer.current.disconnect();
 
-    if (observer.current) observer.current.disconnect(); // Disconnect the previous observer
-
-    // observer.current = new IntersectionObserver((entries) => {
-    //   if (entries[0].isIntersecting && hasMore) {
-    //     // If the last item is in view
-    //     if (items.length == 0 && currentPage == 1) {
-    //       console.log("=0?", items.length, "p==1?", currentPage);
-    //       return;
-    //     }
-    //     if (currentPage < 10) {
-    //       setCurrentPage((prev) => prev + 1); // Increment page number to load more items
-    //       loadMoreItems(); // Load more data
-    //       console.log("load more! curr p<10?", currentPage);
-    //     } else {
-    //       console.log("return null");
-    //       return null;
-    //     }
-    //   }
-    // });
     observer.current = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         // If the last item is in view
-        console.log("load more data");
         if (hasMore && currentPage < 10) {
           setCurrentPage(currentPage + 1);
-          console.log("has?", hasMore);
-          loadMoreItems(); // Load more data
-        }
-        if (!hasMore) {
-          console.log("! has more: -20,end");
-
-          setItems(() => [...items.slice(-20, items.length)]);
-        }
-        if (currentPage == 10) {
-          console.log("curr p=10");
-
-          setHasMore(false);
+          // Load more data
+          loadMoreItems();
         }
       }
     });
-    if (node) observer.current.observe(node); // Observe the last item
+    // Observe the last item
+    if (node) observer.current.observe(node);
   }
   return {
     items,
@@ -96,7 +65,6 @@ const useInfiniteScroll = (itemsPerPage) => {
     loading,
     lastItemObserver,
     currentPage,
-    hasMore,
     setHasMore,
   };
 };
