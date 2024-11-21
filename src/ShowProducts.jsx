@@ -36,6 +36,7 @@ const ShowProducts = () => {
       newItems
     );
     setItems(newItems);
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top
     setHasMore(false);
   };
   useEffect(() => {}, [currentPage, items, hasMore]);
