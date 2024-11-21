@@ -5,8 +5,9 @@ const useInfiniteScroll = (itemsPerPage) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const observer = useRef();
   const [currentPage, setCurrentPage] = useState(1);
+
+  const observer = useRef();
 
   useEffect(() => {
     // Initial fetch when component mounts
