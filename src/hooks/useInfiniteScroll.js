@@ -17,7 +17,7 @@ const useInfiniteScroll = (itemsPerPage) => {
       if (loading || !hasMore) return;
       setLoading(true);
 
-      // simulate an API call with a timeout
+      // Simulate an API request with a delay
       setTimeout(() => {
         const startIndex = (currentPage - 1) * itemsPerPage;
         const newItems = products.slice(startIndex, startIndex + itemsPerPage);

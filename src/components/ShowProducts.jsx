@@ -1,8 +1,8 @@
-import { products } from "../data/mockData";
-import Loader from "./components/Loader";
-import Pagination from "./components/Pagination";
-import ProductCard from "./components/ProductCard";
-import useInfiniteScroll from "./hooks/useInfiniteScroll";
+import { products } from "../../data/mockData";
+import useInfiniteScroll from "../hooks/useInfiniteScroll";
+import Loader from "./Loader";
+import Pagination from "./Pagination";
+import ProductCard from "./ProductCard";
 
 const itemsPerPage = 20;
 const ShowProducts = () => {

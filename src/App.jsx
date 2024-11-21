@@ -1,5 +1,5 @@
 import Header from "./components/Header";
-import ShowProducts from "./ShowProducts";
+import ShowProducts from "./components/ShowProducts";
 import "./App.css";
 
 function App() {
